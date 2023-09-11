@@ -1,0 +1,224 @@
+﻿<UserControl x:Class="WpfApp.Users"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfApp"
+             mc:Ignorable="d" 
+             d:DesignHeight="450"
+             Height="540" 
+             Width="1002"
+             Background="White"
+             Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#ff2c3e50"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="BorderThickness" Value="0.6"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="DataGrid">
+            <Setter Property="VerticalGridLinesBrush" Value="#4b6584"/>
+            <Setter Property="HorizontalGridLinesBrush" Value="#4b6584"/>
+            <Setter Property="AlternatingRowBackground" Value="#ff2c3e50"/>
+            <Setter Property="RowBackground" Value="#34495e"/>
+            <Setter Property="RowHeight" Value="25"/>
+            <Setter Property="RowHeaderWidth" Value="0"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="VerticalScrollBarVisibility" Value="Hidden"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.9*"/>
+            <RowDefinition Height="0.33*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <TextBox
+                x:Name="txtName"
+                HorizontalAlignment="Left"
+                Height="25"
+                Width="180"
+                Margin="55,60,0,0"
+                TextWrapping="Wrap"
+                Text="" 
+                VerticalAlignment="Top"/>
+            <TextBox 
+                x:Name="txtPosition"
+                HorizontalAlignment="Left"
+                Height="25"
+                Width="194"
+                Margin="284,60,0,0" 
+                TextWrapping="Wrap" 
+                Text=""
+                VerticalAlignment="Top"/>
+
+            <TextBox 
+                 x:Name="txtpone_num"
+                HorizontalAlignment="Left" 
+                Height="23" 
+                Margin="57,151,0,0" 
+                TextWrapping="Wrap" 
+                Text="" 
+                VerticalAlignment="Top" 
+                Width="180"/>
+            <TextBox
+                x:Name="txtaddress"
+                HorizontalAlignment="Left" 
+                Height="23" 
+                Margin="540,59,0,0" 
+                TextWrapping="Wrap" 
+                Text=""
+                VerticalAlignment="Top" 
+                Width="194"/>
+            <TextBox
+                x:Name="txtSalary"
+                HorizontalAlignment="Left" 
+                Height="22"
+                Margin="284,148,0,0"
+                TextWrapping="Wrap" 
+                Text="" 
+                VerticalAlignment="Top" 
+                Width="194"/>
+            <TextBox
+                x:Name="txtEmil"
+                HorizontalAlignment="Left" 
+                Height="22"
+                Margin="540,148,0,0"
+                TextWrapping="Wrap" 
+                Text="" 
+                VerticalAlignment="Top" 
+                Width="194"/>
+            <DatePicker 
+                x:Name="txtDate"
+                HorizontalAlignment="Left"
+                Margin="774,58,0,0"
+                VerticalAlignment="Top" 
+                Width="192"/>
+            <Label
+                Content="الراتب" 
+                HorizontalAlignment="Left" 
+                Margin="284,122,0,0"
+                VerticalAlignment="Top"
+                FontWeight="Bold"
+                Width="120"/>
+            <Label 
+                Content="رقم الهاتف"
+                HorizontalAlignment="Left" 
+                Margin="57,121,0,0" 
+                VerticalAlignment="Top"
+                FontWeight="Bold"
+                Width="180"/>
+            <Label 
+                Content="الرتبة"
+                HorizontalAlignment="Left" 
+                Margin="284,33,0,0"
+                VerticalAlignment="Top"
+                FontWeight="Bold"
+                Width="76"/>
+            <Label Content="العنوان" 
+                   HorizontalAlignment="Left"
+                   Margin="540,33,0,0" 
+                   FontWeight="Bold"
+                   VerticalAlignment="Top"
+                   Width="194"/>
+            <Label
+                Content="الأسم"
+                HorizontalAlignment="Left"
+                Margin="55,29,0,0"
+                FontWeight="Bold"
+                VerticalAlignment="Top" 
+                Width="44"/>
+            
+            <Label
+                Content="الايميل" 
+               
+                HorizontalAlignment="Left" 
+                Margin="540,122,0,0"
+                VerticalAlignment="Top"
+                FontWeight="Bold"
+                Width="120"/>
+            <Label Content="تاريخ التوظيف" 
+                HorizontalAlignment="Left"
+                Margin="774,33,0,0" 
+                VerticalAlignment="Top"
+                    FontWeight="Bold"
+                Width="192"/>
+
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Button
+                x:Name="btnAdd"
+                Background="#FF00C977" 
+                Style="{StaticResource ButtonStyle.addbut}"
+                Content="أضافة"
+                HorizontalAlignment="Left"
+                Margin="512,18,0,0" 
+                VerticalAlignment="Top" 
+                Width="94" Height="24" Click="btnAdd_Click"/>
+            <Button
+                x:Name="btnDelet"
+                Background="Red" 
+                Content="حدف" 
+                Style="{StaticResource ButtonStyle.addbut}"
+                HorizontalAlignment="Left"
+                Margin="240,18,0,0" 
+                VerticalAlignment="Top"
+                Width="94" 
+                Height="24"
+                Click="btnDelet_Click"/>
+            <Button 
+                x:Name="btnedit"
+                Background="Blue" 
+                Style="{StaticResource ButtonStyle.addbut}"
+                Content="تعديل" 
+                HorizontalAlignment="Left" 
+                Margin="363,18,0,0" 
+                VerticalAlignment="Top" 
+                Width="94" Height="24" Click="btnedit_Click"/>
+            <Button 
+                x:Name="btnNwe"
+                Background="Teal" 
+                Style="{StaticResource ButtonStyle.addbut}"
+                Content="جديد" 
+                HorizontalAlignment="Left" 
+                Margin="104,18,0,0" 
+                VerticalAlignment="Top"
+                Width="94" 
+                Height="24" Click="btnNwe_Click" />
+
+
+
+
+        </Grid>
+        <Grid Grid.Row="2">
+            <DataGrid x:Name="dgvUsers"
+                      AutoGenerateColumns="False"
+                      Margin="1,1,1,1" Background="White" SelectionChanged="dgvUsers_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding User_id}"  Header="الرقم" IsReadOnly="True" Width="40" />
+                    <DataGridTextColumn Binding="{Binding Name}" Header="أسم الموظف" IsReadOnly="True" Width="120"/>
+                    <DataGridTextColumn Binding="{Binding Position}" Header="الرتبة" IsReadOnly="True" Width="50"/>
+                    <DataGridTextColumn Binding="{Binding Phone_num}"  Header="رقم الهاتف" IsReadOnly="True" Width="80"/>
+                    <DataGridTextColumn Binding="{Binding Address}"  Header="العنوان" IsReadOnly="True" Width="150"/>
+                    <DataGridTextColumn Binding="{Binding Salary}" Header="الراتب" IsReadOnly="True" Width="70"/>
+                    <DataGridTextColumn Binding="{Binding Emile}"  Header="الأيميل" IsReadOnly="True" Width="120"/>
+                    <DataGridTextColumn Binding="{Binding Date_of_employment}"  Header="تاريخ التوظيف" IsReadOnly="True" Width="*"/>
+
+                </DataGrid.Columns>
+
+            </DataGrid>
+        </Grid>
+
+    </Grid>
+
+</UserControl>

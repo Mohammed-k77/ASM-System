@@ -1,0 +1,520 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ASMDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Acounts">
+          <Key>
+            <PropertyRef Name="Acount_id" />
+          </Key>
+          <Property Name="Acount_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_id" Type="int" Nullable="false" />
+          <Property Name="User_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cateqorize">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Classification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cuntry">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="User_id" />
+          </Key>
+          <Property Name="User_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Position" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone_num" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Salary" Type="money" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Date_of_employment" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="Pro_id" />
+          </Key>
+          <Property Name="Pro_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="Weight" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PureWeight" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Karat" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ImageUrl" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Serial_number" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Calssification_Id" Type="int" Nullable="false" />
+          <Property Name="Categorize_Id" Type="int" Nullable="false" />
+          <Property Name="Imported_Quantity" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="made" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Unauthorizeed_exit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Pro_id" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Door_num" Type="int" Nullable="false" />
+          <Property Name="User_id" Type="int" Nullable="false" />
+          <Property Name="Information" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Acounts_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Acounts" Type="Self.Acounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Acounts">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Cateqorize">
+          <End Role="Cateqorize" Type="Self.Cateqorize" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cateqorize">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Categorize_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Classification">
+          <End Role="Classification" Type="Self.Classification" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classification">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Calssification_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Cuntry">
+          <End Role="Cuntry" Type="Self.Cuntry" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuntry">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="made" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Unauthorizeed_exit_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Unauthorizeed_exit" Type="Self.Unauthorizeed_exit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Unauthorizeed_exit">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Unauthorizeed_exit_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Unauthorizeed_exit" Type="Self.Unauthorizeed_exit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Pro_id" />
+            </Principal>
+            <Dependent Role="Unauthorizeed_exit">
+              <PropertyRef Name="Pro_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ASMDbModelStoreContainer">
+          <EntitySet Name="Acounts" EntityType="Self.Acounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cateqorize" EntityType="Self.Cateqorize" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Classification" EntityType="Self.Classification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cuntry" EntityType="Self.Cuntry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Unauthorizeed_exit" EntityType="Self.Unauthorizeed_exit" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Acounts_Employee" Association="Self.FK_Acounts_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Acounts" EntitySet="Acounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Cateqorize" Association="Self.FK_Products_Cateqorize">
+            <End Role="Cateqorize" EntitySet="Cateqorize" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Classification" Association="Self.FK_Products_Classification">
+            <End Role="Classification" EntitySet="Classification" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Cuntry" Association="Self.FK_Products_Cuntry">
+            <End Role="Cuntry" EntitySet="Cuntry" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Unauthorizeed_exit_Employee" Association="Self.FK_Unauthorizeed_exit_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Unauthorizeed_exit" EntitySet="Unauthorizeed_exit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Unauthorizeed_exit_Products" Association="Self.FK_Unauthorizeed_exit_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Unauthorizeed_exit" EntitySet="Unauthorizeed_exit" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ASMDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Acount">
+          <Key>
+            <PropertyRef Name="Acount_id" />
+          </Key>
+          <Property Name="Acount_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_id" Type="Int32" Nullable="false" />
+          <Property Name="User_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Acounts_Employee" FromRole="Acounts" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Cateqorize">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_Cateqorize" FromRole="Cateqorize" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Classification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_Classification" FromRole="Classification" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Cuntry">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_Cuntry" FromRole="Cuntry" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="User_id" />
+          </Key>
+          <Property Name="User_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone_num" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Salary" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Date_of_employment" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Acounts" Relationship="Self.FK_Acounts_Employee" FromRole="Employee" ToRole="Acounts" />
+          <NavigationProperty Name="Unauthorizeed_exit" Relationship="Self.FK_Unauthorizeed_exit_Employee" FromRole="Employee" ToRole="Unauthorizeed_exit" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Pro_id" />
+          </Key>
+          <Property Name="Pro_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Weight" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PureWeight" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Karat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ImageUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Serial_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Calssification_Id" Type="Int32" Nullable="false" />
+          <Property Name="Categorize_Id" Type="Int32" Nullable="false" />
+          <Property Name="Imported_Quantity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="made" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cateqorize" Relationship="Self.FK_Products_Cateqorize" FromRole="Products" ToRole="Cateqorize" />
+          <NavigationProperty Name="Classification" Relationship="Self.FK_Products_Classification" FromRole="Products" ToRole="Classification" />
+          <NavigationProperty Name="Cuntry" Relationship="Self.FK_Products_Cuntry" FromRole="Products" ToRole="Cuntry" />
+          <NavigationProperty Name="Unauthorizeed_exit" Relationship="Self.FK_Unauthorizeed_exit_Products" FromRole="Products" ToRole="Unauthorizeed_exit" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Unauthorizeed_exit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Pro_id" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Door_num" Type="Int32" Nullable="false" />
+          <Property Name="User_id" Type="Int32" Nullable="false" />
+          <Property Name="Information" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Unauthorizeed_exit_Employee" FromRole="Unauthorizeed_exit" ToRole="Employee" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Unauthorizeed_exit_Products" FromRole="Unauthorizeed_exit" ToRole="Products" />
+        </EntityType>
+        <Association Name="FK_Acounts_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Acounts" Type="Self.Acount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Acounts">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Cateqorize">
+          <End Role="Cateqorize" Type="Self.Cateqorize" Multiplicity="1" />
+          <End Role="Products" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cateqorize">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Categorize_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Classification">
+          <End Role="Classification" Type="Self.Classification" Multiplicity="1" />
+          <End Role="Products" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classification">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="Calssification_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Cuntry">
+          <End Role="Cuntry" Type="Self.Cuntry" Multiplicity="1" />
+          <End Role="Products" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuntry">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="made" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Unauthorizeed_exit_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Unauthorizeed_exit" Type="Self.Unauthorizeed_exit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="User_id" />
+            </Principal>
+            <Dependent Role="Unauthorizeed_exit">
+              <PropertyRef Name="User_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Unauthorizeed_exit_Products">
+          <End Role="Products" Type="Self.Product" Multiplicity="1" />
+          <End Role="Unauthorizeed_exit" Type="Self.Unauthorizeed_exit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Pro_id" />
+            </Principal>
+            <Dependent Role="Unauthorizeed_exit">
+              <PropertyRef Name="Pro_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProjectEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Acounts" EntityType="Self.Acount" />
+          <EntitySet Name="Cateqorizes" EntityType="Self.Cateqorize" />
+          <EntitySet Name="Classifications" EntityType="Self.Classification" />
+          <EntitySet Name="Cuntries" EntityType="Self.Cuntry" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Unauthorizeed_exit" EntityType="Self.Unauthorizeed_exit" />
+          <AssociationSet Name="FK_Acounts_Employee" Association="Self.FK_Acounts_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Acounts" EntitySet="Acounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Cateqorize" Association="Self.FK_Products_Cateqorize">
+            <End Role="Cateqorize" EntitySet="Cateqorizes" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Classification" Association="Self.FK_Products_Classification">
+            <End Role="Classification" EntitySet="Classifications" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Cuntry" Association="Self.FK_Products_Cuntry">
+            <End Role="Cuntry" EntitySet="Cuntries" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Unauthorizeed_exit_Employee" Association="Self.FK_Unauthorizeed_exit_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Unauthorizeed_exit" EntitySet="Unauthorizeed_exit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Unauthorizeed_exit_Products" Association="Self.FK_Unauthorizeed_exit_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Unauthorizeed_exit" EntitySet="Unauthorizeed_exit" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ASMDbModelStoreContainer" CdmEntityContainer="ProjectEntities">
+          <EntitySetMapping Name="Acounts">
+            <EntityTypeMapping TypeName="ASMDbModel.Acount">
+              <MappingFragment StoreEntitySet="Acounts">
+                <ScalarProperty Name="Acount_id" ColumnName="Acount_id" />
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="User_name" ColumnName="User_name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cateqorizes">
+            <EntityTypeMapping TypeName="ASMDbModel.Cateqorize">
+              <MappingFragment StoreEntitySet="Cateqorize">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Classifications">
+            <EntityTypeMapping TypeName="ASMDbModel.Classification">
+              <MappingFragment StoreEntitySet="Classification">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cuntries">
+            <EntityTypeMapping TypeName="ASMDbModel.Cuntry">
+              <MappingFragment StoreEntitySet="Cuntry">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="ASMDbModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Phone_num" ColumnName="Phone_num" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Date_of_employment" ColumnName="Date_of_employment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="ASMDbModel.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="Pro_id" ColumnName="Pro_id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="PureWeight" ColumnName="PureWeight" />
+                <ScalarProperty Name="Karat" ColumnName="Karat" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="Serial_number" ColumnName="Serial_number" />
+                <ScalarProperty Name="Calssification_Id" ColumnName="Calssification_Id" />
+                <ScalarProperty Name="Categorize_Id" ColumnName="Categorize_Id" />
+                <ScalarProperty Name="Imported_Quantity" ColumnName="Imported_Quantity" />
+                <ScalarProperty Name="made" ColumnName="made" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ASMDbModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Unauthorizeed_exit">
+            <EntityTypeMapping TypeName="ASMDbModel.Unauthorizeed_exit">
+              <MappingFragment StoreEntitySet="Unauthorizeed_exit">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Pro_id" ColumnName="Pro_id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Door_num" ColumnName="Door_num" />
+                <ScalarProperty Name="User_id" ColumnName="User_id" />
+                <ScalarProperty Name="Information" ColumnName="Information" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,432 @@
+﻿<UserControl x:Class="WpfApp.Products"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfApp"
+             mc:Ignorable="d" 
+             Height="540" 
+             Width="1002"
+             Background="White"
+             Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#ff2c3e50"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="BorderThickness" Value="0.6"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="DataGrid">
+            <Setter Property="VerticalGridLinesBrush" Value="#4b6584"/>
+            <Setter Property="HorizontalGridLinesBrush" Value="#4b6584"/>
+            <Setter Property="AlternatingRowBackground" Value="#ff2c3e50"/>
+            <Setter Property="RowBackground" Value="#34495e"/>
+            <Setter Property="RowHeight" Value="25"/>
+            <Setter Property="RowHeaderWidth" Value="0"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="VerticalScrollBarVisibility" Value="Hidden"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.9*"/>
+            <RowDefinition Height="0.33*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <StackPanel 
+                Orientation="Horizontal"
+                Margin="291,19,505,179">
+                <TextBox
+                    x:Name="txtSearch"
+                    HorizontalAlignment="Left"
+                    Height="20"
+                    Width="164"
+                    TextWrapping="Wrap"
+                    Text="" 
+                    VerticalAlignment="Bottom"
+                    TextChanged="txtSearch_TextChanged"/>
+                <TextBlock 
+                    Width="42" 
+                    Height="20"
+                    VerticalAlignment="Center"
+                    Background="#FF00C093"
+                    Foreground="White"
+                    Text="بحث"
+                    FontWeight="Bold"
+                    TextAlignment="Center"/>
+            </StackPanel>
+            <StackPanel 
+                Orientation="Horizontal"
+                Margin="20,51,753,147">
+                <TextBox
+                    x:Name="txtName"
+                    HorizontalAlignment="Left"
+                    Height="20"
+                    Width="179"
+                    TextWrapping="Wrap"
+                    Text="" 
+                    VerticalAlignment="Top"/>
+                <TextBlock 
+                    Width="50" 
+                    Height="20"
+                    VerticalAlignment="Center"
+                    Background="#FF00C093"
+                    Foreground="White"
+                    Text="الأسم"
+                    FontWeight="Bold"
+                    TextAlignment="Center"/>
+            </StackPanel>
+            <StackPanel 
+                Orientation="Horizontal"
+                Height="20"
+                Margin="165,105,753,93">
+                <TextBox 
+                    x:Name="txtWight"
+                    HorizontalAlignment="Left" 
+                    Height="20" 
+                    TextWrapping="Wrap" 
+                    Text="" 
+                    VerticalAlignment="Top" 
+                    Width="50"/>
+                <TextBlock 
+                    Width="34"
+                    Height="20"                   
+                    Background="#FF00C093"
+                    Foreground="White"
+                    FontWeight="Bold"
+                    Text="الوزن"
+                    TextAlignment="Center"/>
+            </StackPanel>
+            <StackPanel 
+                Orientation="Horizontal"
+                Height="20"
+                Margin="20,105,857,93">
+                <TextBox 
+                    x:Name="txtPur_w"
+                    HorizontalAlignment="Left"
+                    Height="20"
+                    Width="50" 
+                    TextWrapping="Wrap" 
+                    Text=""
+                    VerticalAlignment="Top" Margin="0,0,0,-2"/>
+                <TextBlock 
+                    Width="75"
+                    Height="20"                   
+                    Background="#FF00C093"
+                    Foreground="White"
+                    Text="الوزن الصافي"
+                    FontWeight="Bold"
+                    TextAlignment="Center"/>
+            </StackPanel>
+            <StackPanel 
+                x:Name="stkSerial_num"
+                Orientation="Horizontal"
+                Height="20"
+                Margin="20,151,753,47"
+                Visibility="Visible">
+                <TextBox
+                    x:Name="txtSerial_num"
+                    HorizontalAlignment="Left"  
+                    TextWrapping="Wrap"
+                    Text=""
+                    VerticalAlignment="Top"
+                    Height="20"
+                    Width="140"
+                    Visibility="Visible" Margin="0,0,0,-5"/>
+                <TextBlock 
+                    Width="89"
+                    Height="20"                   
+                    Background="#FF00C093"
+                    Foreground="White"
+                    Text="الرقم التسلسلي"
+                    FontWeight="Bold"
+                    TextAlignment="Center"/>
+            </StackPanel>
+            <StackPanel 
+                Orientation="Horizontal"
+                Height="20"
+                Margin="291,51,505,147">
+                <TextBox
+                    x:Name="txtKerat"
+                    HorizontalAlignment="Left" 
+                    Height="20"
+                    TextWrapping="Wrap" 
+                    Text=""
+                    VerticalAlignment="Top" 
+                    Width="140"/>
+                <TextBlock 
+                    Width="66"
+                    Height="20"                   
+                    Background="#FF00C093"
+                    Foreground="White"
+                    FontWeight="Bold"
+                    Text="العيار"
+                  
+                    TextAlignment="Center"/>
+            </StackPanel>
+            <StackPanel 
+                Orientation="Horizontal"
+                Height="20"
+                Margin="291,105,505,93">
+                <TextBox
+                    x:Name="txtPeice"
+                    HorizontalAlignment="Left" 
+                    Height="20"
+                    TextWrapping="Wrap" 
+                    Text="" 
+                    VerticalAlignment="Top" 
+                    Width="140"/>
+                <TextBlock 
+                    Width="66"
+                    Height="20"                   
+                    Background="#FF00C093"
+                    Foreground="White"
+                    FontWeight="Bold"
+                    Text="السعر"
+                    TextAlignment="Center"/>
+            </StackPanel>
+            <StackPanel 
+                Orientation="Horizontal"
+                Height="20"
+                Margin="291,151,505,47"
+                x:Name="stkImported_Quntity"
+                Visibility="Visible">
+                <TextBox 
+                    x:Name="txtImported_Quntity"
+                    HorizontalAlignment="Left"
+                    Height="20" 
+                    TextWrapping="Wrap"
+                    Text="" 
+                    VerticalAlignment="Top" 
+                    Width="108"
+                    Visibility="Visible"/>
+                <TextBlock 
+                    Width="98"
+                    Height="20"                   
+                    Background="#FF00C093"
+                    Foreground="White"
+                    FontWeight="Bold"
+                    Text="الكمية المستوردة"
+                    TextAlignment="Center"/>
+            </StackPanel>
+            <StackPanel 
+                x:Name="stkCatogrize"
+                Orientation="Horizontal"
+                Height="20"
+                Margin="531,51,245,147"
+                Visibility="Visible">
+                <ComboBox 
+                    x:Name="cmbCatogrize"
+                    HorizontalAlignment="Left" 
+                    Height="20"
+                    Text=""
+                    VerticalAlignment="Top"
+                    Width="143"
+                    Visibility="Visible"
+                    SelectedValuePath="ID"
+                    DisplayMemberPath="Name"
+                    IsEditable="True"/>
+                <TextBlock 
+                    Width="83"
+                    Height="20"                   
+                    Background="#FF00C093"
+                    Foreground="White"
+                    FontWeight="Bold"
+                    Text="النوع"
+                    TextAlignment="Center"/>
+            </StackPanel>
+            <StackPanel 
+                x:Name="stkclassification"
+                Orientation="Horizontal"
+                Height="20"
+                Margin="531,105,245,93"
+                Visibility="Visible">
+                <ComboBox 
+                    x:Name="cmbclassification"
+                    HorizontalAlignment="Left" 
+                    Height="20"
+                    Text=""
+                    VerticalAlignment="Top"
+                    Width="145"
+                    SelectedValuePath="ID"
+                    DisplayMemberPath="Name"
+                    IsEditable="True"/>
+                <TextBlock 
+                    Width="80"
+                    Height="20"                   
+                    Background="#FF00C093"
+                    Foreground="White"
+                    Text="الصنف"
+                    FontWeight="Bold"
+                    TextAlignment="Center"/>
+            </StackPanel>
+            <StackPanel 
+                x:Name="stkMade_in"
+                Orientation="Horizontal"
+                Height="20"
+                Margin="531,151,245,47"
+                Visibility="Visible">
+                <ComboBox 
+                    x:Name="cmbMade_in"
+                    HorizontalAlignment="Left" 
+                    Height="20" 
+                    Text=""
+                    VerticalAlignment="Top"
+                    Width="146"
+                    Visibility="Visible"
+                    SelectedValuePath="ID"
+                    DisplayMemberPath="Name"
+                    IsEditable="True"
+                    />
+                <TextBlock 
+                    Width="80"
+                    Height="20"                   
+                    Background="#FF00C093"
+                    Foreground="White"
+                    Text="صناعة"
+                    FontWeight="Bold"
+                    TextAlignment="Center"/>
+            </StackPanel>
+            <Image
+                x:Name="ProductAmg"
+                Source="/Upload/22.png" 
+                Stretch="Fill"
+                Height="150"            
+                Width="180"              
+                Margin="20"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+
+            <Button
+                x:Name="btnproinfo"
+                Background="#FF00C093"
+                Content="ملعومات أضافية" 
+                Style="{StaticResource ButtonStyle.addbut}"          
+                HorizontalAlignment="Left" 
+                Margin="656,18,0,0"
+                VerticalAlignment="Top"
+                Width="94" 
+                Height="24"
+                Visibility="Hidden"
+                RenderTransformOrigin="0.133,0.599"
+                Click="btnproinfo_Click"/>
+
+            <Button
+                x:Name="btnproinfoClose"
+                Background="#FF00C093"
+                Content="ملعومات أقل " 
+                Style="{StaticResource ButtonStyle.addbut}"               
+                HorizontalAlignment="Left" 
+                Margin="655,18,0,0"
+                VerticalAlignment="Top"
+                Width="95" 
+                Height="24"
+                RenderTransformOrigin="0.133,0.599" 
+                Click="btnproinfoClose_Click"
+                Visibility="Visible"/>
+
+            <Button
+                x:Name="btnAdd"
+                Background="#FF00C977" 
+                Content="أضافة"          
+                HorizontalAlignment="Left"
+                Margin="512,18,0,0" 
+                VerticalAlignment="Top" 
+                Width="94" Height="24"
+                Style="{StaticResource ButtonStyle.addbut}"
+                Click="btnAdd_Click"/>
+
+            <Button
+                x:Name="btnDelet"
+                Background="Red" 
+                Content="حدف" 
+                Style="{StaticResource ButtonStyle.addbut}"
+                HorizontalAlignment="Left"
+                Margin="240,18,0,0" 
+                VerticalAlignment="Top"
+                Width="94" 
+                Height="24" Click="btnDelet_Click" Foreground="White" FontWeight="Bold"/>
+
+            <Button 
+                x:Name="btnedit"
+                Background="Blue" 
+                Content="تعديل" 
+                Style="{StaticResource ButtonStyle.addbut}"
+                HorizontalAlignment="Left" 
+                Margin="363,18,0,0" 
+                VerticalAlignment="Top" 
+                Width="94"
+                Height="24"
+                Click="btnedit_Click" Foreground="White" />
+
+            <Button 
+                x:Name="btnNwe"
+                Background="#FF00C093" 
+                Content="جديد" 
+                HorizontalAlignment="Left" 
+                Style="{StaticResource ButtonStyle.addbut}"
+                Margin="104,18,0,0" 
+                VerticalAlignment="Top"
+                Width="94" 
+                Height="24" 
+                Click="btnNwe_Click" FontWeight="Bold"/>
+
+            <Button
+                x:Name="btnSearch"
+                Background="#FF00C093"
+                Content="بحث حسب الفئة" 
+                Style="{StaticResource ButtonStyle.addbut}"
+                HorizontalAlignment="Left" 
+                Margin="800,18,0,0"
+                VerticalAlignment="Top"
+                Width="100" 
+                Height="24"
+                RenderTransformOrigin="0.133,0.599"
+                Click="btnSearch_Click" FontWeight="Bold"/>
+            <Button
+                x:Name="btnChooce"
+                Background="#FF00C977" 
+                Content="تغيير الصورة"          
+                HorizontalAlignment="Left"
+                Margin="881,-206,0,0" 
+                VerticalAlignment="Top" 
+                Width="73" Height="27"
+                Style="{StaticResource ButtonStyle.addbut}"
+                Click="btnChooce_Click"/>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <DataGrid x:Name="dgvProducts"
+                      AutoGenerateColumns="False"
+                      SelectionChanged="dgvProducts_info_SelectionChanged_1" Background="White">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Pro_id}"  Header="الرقم" IsReadOnly="True" Width="40" />
+                    <DataGridTextColumn Binding="{Binding Name}" Header="الأسم" IsReadOnly="True" Width="150"/>
+                    <DataGridTextColumn Binding="{Binding price}"  Header="السعر" IsReadOnly="True" Width="120"/>
+                    <DataGridTextColumn Binding="{Binding Weight}"  Header="الوزن" IsReadOnly="True" Width="50"/>
+                    <DataGridTextColumn Binding="{Binding pure_weight}"  Header="الوزن الصافي" IsReadOnly="True" Width="70"/>
+                    <DataGridTextColumn Binding="{Binding Karat}"  Header="العيار" IsReadOnly="True" Width="40"/>
+                    <DataGridTextColumn Binding="{Binding Serial_number}"  Header="الرقم التسلسلي" IsReadOnly="True" Width="120" Visibility="Visible" />
+                    <DataGridTextColumn Binding="{Binding Classification}" Header="الصنف" IsReadOnly="True" Width="100" Visibility="Visible"/>
+                    <DataGridTextColumn Binding="{Binding  Cateqorize}"  Header="النوع" IsReadOnly="True" Width="100" Visibility="Hidden"/>
+                    <DataGridTextColumn Binding="{Binding made_in}"  Header="البلد المصنع" IsReadOnly="True" Width="100" Visibility="Visible"/>
+                    <DataGridTextColumn Binding="{Binding Imported_Quntity}"  Header="الكمية المستوردة" IsReadOnly="True" Width="*" Visibility="Visible"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </Grid>
+
+    </Grid>
+
+</UserControl>

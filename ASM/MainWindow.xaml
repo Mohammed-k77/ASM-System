@@ -1,0 +1,358 @@
+﻿<Window x:Class="WpfApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:hw="http://schemas.hpod9.com/haley/wpf"
+        xmlns:hm="http://schemas.hpod9.com/haley/mvvm"
+        xmlns:local="clr-namespace:WpfApp" 
+        mc:Ignorable="d"
+        Title="MainWindow"
+        Height="700" 
+        Width="1200" 
+        MaxHeight="700"
+        MaxWidth="1200"
+        MinHeight="700"
+        MinWidth="1200"
+        Background="White"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded" 
+        MouseDown="Window_MouseDown">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" >
+
+            <Border Style="{StaticResource brdrStyle.02}"/>
+
+            <Image
+                    Stretch="Uniform"
+                    Source="/Images/Logo2.png"                   
+                    Margin="15,5,1130,0"/>
+
+            <Button
+                x:Name="btnClose"
+                Width="35"
+                Height="35"
+                Margin="0,1,10,4"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Click="btnClose_Click"
+                Style="{StaticResource ButtonStyle.ModernClose}">
+
+                <Image
+                    x:Name="imgbtnClose"
+                    Width="30"
+                    Height="30"
+                    Source="/Images/Close.png" />
+            </Button>
+
+
+            <Button
+                x:Name="btnMin"
+                Width="35"
+                Height="35"
+                Margin="0,1,61,4"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Click="btnMin_Click"
+                Style="{StaticResource ButtonStyle.ModernClose}">
+
+                <Image
+                    x:Name="imgbtnMinimize"
+                    Width="30"
+                    Height="30"
+                    Source="/Images/Minimize.png" RenderTransformOrigin="0.5,0.5" >
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="179.748"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+            </Button>
+
+
+        </Grid>
+
+        <Grid Grid.Row="1" 
+              x:Name="griheader" 
+              Background="#FF081F25">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock
+                x:Name="txtheader"
+                Grid.Column="1"
+                Text="Home"
+                FontSize="30"
+                TextAlignment="Center"
+                FontWeight="Bold"
+                Margin="425,26,444,18" 
+                Foreground="White"/>
+            <Button
+                x:Name="btnhome"
+                Grid.Column="0"
+                Style="{StaticResource ButtonStyle.Home}" 
+                Click="btnhome_Click">
+                <StackPanel
+                        Orientation="Horizontal"
+                        Width="170" Height="90">
+                    <Image
+                            Source="/Images/Logo2.png" 
+                            Stretch="Uniform"
+                            Width="35"
+                            Height="35"
+                            Margin="2,26,2,30"/>
+                    <TextBlock
+                            Text="HOME"
+                            FontSize="20" 
+                            Width="90"
+                            TextAlignment="Center"
+                            Height="33"
+                            FontWeight="Bold"
+                        Foreground="White"/>
+                </StackPanel>
+            </Button>
+            <TextBlock 
+                Grid.Column="1"
+                HorizontalAlignment="Left" 
+                Margin="874,55,0,18"
+                TextWrapping="Wrap"
+                Foreground="White"
+                TextAlignment="Center"
+                FontSize="15"
+                Text=" :  أسم المستخدم " 
+                FontWeight="Bold"
+                Height="27" 
+                Width="110"/>
+
+            <TextBlock
+                x:Name="lbluser"
+                Grid.Column="1"
+                HorizontalAlignment="Left" 
+                Margin="689,55,0,18"
+                TextWrapping="Wrap"
+                Foreground="White"
+                TextAlignment="Right"
+                FontSize="15"
+                FontWeight="Bold"
+                Text="محمد مزهر بافرج" 
+                Height="27" 
+                Width="180"/>
+        </Grid>
+
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="1" Background="#FF081F25">
+
+                <Image
+                    x:Name="imghome"
+                    Margin="194,85,200,276"
+                    Source="/Images/Logo2.png"/>
+
+                <TextBlock
+                    x:Name="txthome"
+                    Margin="260,318,174,175"
+                    FontSize="30"
+                    Text="ASM System for profitional security"
+                    FontWeight="Black"
+                    Foreground="#FF21FFF5"
+                    Height="76"/>
+                                    
+                <local:Products
+                    x:Name="Productswin"
+                    Height="Auto"
+                    Width="Auto"
+                    Margin="0,0,0,0"
+                    Visibility="Hidden"/>
+              
+                <local:Exit
+                    x:Name="Exitwin"
+                    Visibility="Hidden"
+                    Height="Auto"
+                    Width="Auto"
+                    Margin="0,0,0,0"/>
+                 
+                <local:Users
+                    x:Name="Userswin"
+                    Height="Auto"
+                    Width="Auto"
+                    Margin="0,0,0,0"
+                    Visibility="Hidden"/>
+
+                <local:Acounts
+                    x:Name="Acountswin"
+                    Height="Auto"
+                    Width="Auto"
+                    Margin="0,0,0,0"
+                    Visibility="Hidden"/>
+                
+            </Grid>
+
+            <Grid Grid.Column="0">
+                <Button
+                    x:Name="btnproducts"
+                    Height="50"  
+                    Margin="0,0,0,489"
+                    Style="{StaticResource ButtonStyle.Products}"
+                    Click="btnproducts_Click_1">
+
+                    <StackPanel
+                        Orientation="Horizontal"
+                        Width="167" Height="50">
+                        <Image
+                            Source="/Images/2.ico" 
+                            Stretch="Uniform"
+                            Width="39"
+                            Margin="2,10"
+                            />
+
+                        <TextBlock
+                            Text="المنتجات"
+                            FontSize="20" 
+                            Width="101"
+                            VerticalAlignment="Center"
+                            TextAlignment="Center"
+                            FontWeight="Bold" 
+                            Margin="0,10"
+                            Height="30"/>
+                    </StackPanel>
+                </Button>
+
+
+                <Button
+                    x:Name="btnUnauthorized"
+                    Height="50"
+                    Margin="0,50,0,439"
+                    Style="{StaticResource ButtonStyle.Unauthorized}"
+                    Click="btnUnauthorized_Click">
+                    <StackPanel
+                        Orientation="Horizontal"
+                        Width="167" Height="50">
+                        <Image
+                            Source="/Images/1.png" 
+                            Stretch="Uniform"
+                            Width="39"
+                            Margin="2,10"
+                            />
+                        <TextBlock
+                            Text="خروج غير مصرح "
+                            FontSize="15" 
+                            Width="122"
+                            VerticalAlignment="Center"
+                            TextAlignment="Center"
+                            FontWeight="Bold" 
+                            Margin="0,10"
+                            Height="30" />
+                    </StackPanel>
+                    <hw:BadgeSetter.Badge>
+                        <hw:Badge
+                            x:Name="txtNotification"
+                            Label="+99"
+                            Kind="Success"
+                            Alignment="TopRight"
+                            Shape="Rectangle"
+                            CornerRadius="20"
+                            Background="Red"
+                            IsVisible="False"/>
+                    </hw:BadgeSetter.Badge>
+                </Button>
+
+                <Button
+                     x:Name="btnUsers"
+                    Height="50"
+                    Margin="0,100,0,389"
+                   
+                    Style="{StaticResource ButtonStyle.Users}"
+                    Click="btnUsers_Click">
+
+                    <StackPanel
+                        Orientation="Horizontal"
+                        Width="167" Height="50">
+                        <Image
+                            Source="/Images/3.ico" 
+                            Stretch="Uniform"
+                            Width="39"
+                            Margin="2,10"
+                            />
+                        <TextBlock
+                            Text="الموظفين"
+                            FontSize="20" 
+                            Width="106"
+                            VerticalAlignment="Center"
+                            TextAlignment="Center"
+                            FontWeight="Bold" 
+                            Margin="0,10"
+                            Height="30" />
+                    </StackPanel>
+                </Button>
+                <Button
+                     x:Name="btnAconts"
+                    Margin="0,150,0,351"                  
+                    Style="{StaticResource ButtonStyle.Acounts}"
+                    Click="btnAconts_Click">
+
+                    <StackPanel
+                        Orientation="Horizontal"
+                        Width="167" Height="50">
+                        <Image
+                            Source="/Images/4.ico" 
+                            Stretch="Uniform"
+                            Width="39"
+                             Margin="0,10,0,17"/>
+                        <TextBlock
+                            Text="الحسابات"
+                            FontSize="20" 
+                            Width="116"
+                            VerticalAlignment="Center"
+                            TextAlignment="Center"
+                            FontWeight="Bold" 
+                            Margin="0,10,0,17"
+                            Height="23" />
+                    </StackPanel>
+
+                </Button>
+
+                <Button
+                     x:Name="btnExit"
+                    Margin="0,201,0,300"                  
+                    Style="{StaticResource ButtonStyle.Exit}"
+                    Click="btnExit_Click"
+                    >
+
+                    <StackPanel
+                        Orientation="Horizontal"
+                        Width="167" Height="50">
+                        <Image
+                            Source="/Images/information.png" 
+                            Stretch="Uniform"
+                            Width="33"
+                             Margin="0,6,0,14"/>
+                        <TextBlock
+                            Text="تسجيل الخروج "
+                            FontSize="17" 
+                            Width="127"
+                            VerticalAlignment="Center"
+                            TextAlignment="Center"
+                            FontWeight="Bold" 
+                            Margin="0,10,0,14"
+                            Height="26" />
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

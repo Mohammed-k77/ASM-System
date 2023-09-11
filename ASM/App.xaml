@@ -1,0 +1,680 @@
+﻿<Application x:Class="WpfApp.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:WpfApp"
+             xmlns:properties="clr-namespace:WpfApp.Properties"
+             StartupUri="LoginWin.xaml">
+    <Application.Resources>
+        <ResourceDictionary
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:WpfApp">
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Haley.WPF;component/Dictionaries/haleyRD.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <!--#region MessageBox Border Styles-->
+
+            <Style x:Key="brdrStyle.01" TargetType="Border">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush>
+                            <GradientStop Offset="0.3" Color="#DF2180" />
+                            <GradientStop Offset="1" Color="#F322AB" />
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="brdrStyle.02" TargetType="Border">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush>
+                            <GradientStop Offset="0.3" Color="#21DFDF" />
+                            <GradientStop Offset="1" Color="#0AF090" />
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="brdrStyle.03" TargetType="Border">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush>
+                            <GradientStop Offset="0.3" Color="#EEC193" />
+                            <GradientStop Offset="1" Color="#F5B152" />
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!--#endregion-->
+
+
+            <!--#region MessageBox Buttons Styles-->
+
+
+            <Style x:Key="ButtonStyle.Modern" TargetType="{x:Type Button}">
+
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="FontFamily" Value="Helvetica" />
+                <Setter Property="FontWeight" Value="Light" />
+                <Setter Property="Background" Value="Transparent" />
+
+                <Setter Property="Template">
+
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border
+                        x:Name="btnBrdr"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="White"
+                        BorderThickness="2"
+                        CornerRadius="5">
+
+                                <ContentPresenter
+                            x:Name="contentPresenter"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center" />
+
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="White" />
+                                    <Setter Property="Opacity" Value="0.4" />
+                                    <Setter Property="Foreground" Value="DeepSkyBlue" />
+                                </Trigger>
+
+                                <Trigger Property="IsEnabled" Value="false">
+
+                                    <Setter TargetName="btnBrdr" Property="Background" Value="#FFF0F0F0" />
+                                    <Setter TargetName="btnBrdr" Property="BorderBrush" Value="#686868" />
+                                    <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="Gray" />
+
+                                </Trigger>
+
+                            </ControlTemplate.Triggers>
+
+                        </ControlTemplate>
+
+                    </Setter.Value>
+
+                </Setter>
+
+            </Style>
+
+
+            <!--#endregion-->
+
+
+            <!--#region Modern Button Style Close-->
+
+
+
+            <Style
+        x:Key="ButtonStyle.ModernClose"
+        BasedOn="{StaticResource ButtonStyle.Modern}"
+        TargetType="{x:Type Button}">
+
+                <Setter Property="Template">
+
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="#FFE2DB00"
+                        BorderThickness="0"
+                        CornerRadius="5">
+
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+
+                </Setter>
+
+                <Style.Triggers>
+
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#FFFD5959" />
+                        <Setter Property="Opacity" Value="1" />
+                    </Trigger>
+
+                </Style.Triggers>
+
+            </Style>
+
+            <!--#endregion-->
+
+
+            <!--#region StyleMode-->
+
+            <Style x:Key="brdrStyle.04" TargetType="Border">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default} , Path=StyleMode}" Value="Bink">
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <LinearGradientBrush>
+                                    <GradientStop Offset="0.3" Color="#DF2180" />
+                                    <GradientStop Offset="1" Color="#F322AB" />
+                                </LinearGradientBrush>
+                            </Setter.Value>
+                        </Setter>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=StyleMode}" Value="Green">
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <LinearGradientBrush>
+                                    <GradientStop Offset="0.3" Color="#21DFDF" />
+                                    <GradientStop Offset="1" Color="#0AF090" />
+                                </LinearGradientBrush>
+                            </Setter.Value>
+                        </Setter>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=StyleMode}" Value="Orange">
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <LinearGradientBrush>
+                                    <GradientStop Offset="0.3" Color="#EEC193" />
+                                    <GradientStop Offset="1" Color="#F5B152" />
+                                </LinearGradientBrush>
+                            </Setter.Value>
+                        </Setter>
+                    </DataTrigger>
+
+                </Style.Triggers>
+            </Style>
+
+            <!--#endregion-->
+
+
+
+
+
+            <!--#Home-->
+
+            <Style x:Key="ButtonStyle.Home" TargetType="{x:Type Button}">
+
+                <Setter Property="Foreground" Value="Black" />
+                <Setter Property="FontFamily" Value="Helvetica" />
+                <Setter Property="FontWeight" Value="Light" />
+                <Setter Property="Background" Value="Transparent" />
+
+                <Setter Property="Template">
+
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border
+                        x:Name="btnBrdr"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="White"
+                        BorderThickness="2"
+                        CornerRadius="5">
+                                <ContentPresenter
+                            x:Name="contentPresenter"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#FF081F25" />
+                                    <Setter Property="Opacity" Value="0.5" />
+                                    <Setter Property="Foreground" Value="#FF6A6A6A" />
+                                </Trigger>
+                                <Trigger Property="IsFocused" Value="True">
+                                    <Setter Property="Background" Value="#FF081F25" />
+                                    <Setter Property="Opacity" Value="1" />
+                                    <Setter Property="Foreground" Value="#FF6A6A6A" />
+                                </Trigger>
+
+                                <Trigger Property="IsEnabled" Value="false">
+
+                                    <Setter TargetName="btnBrdr" Property="Background" Value="#FFF0F0F0" />
+                                    <Setter TargetName="btnBrdr" Property="BorderBrush" Value="#686868" />
+                                    <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="Gray" />
+
+                                </Trigger>
+
+                            </ControlTemplate.Triggers>
+
+                        </ControlTemplate>
+
+                    </Setter.Value>
+
+                </Setter>
+
+            </Style>
+
+            <!--#EndHome -->
+
+
+
+            <!-- Products-->
+
+            <Style x:Key="ButtonStyle.Products" TargetType="{x:Type Button}">
+
+                <Setter Property="Foreground" Value="Black" />
+                <Setter Property="FontFamily" Value="Helvetica" />
+                <Setter Property="FontWeight" Value="Light" />
+                <Setter Property="Background" Value="Transparent" />
+
+                <Setter Property="Template">
+
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border
+                        x:Name="btnBrdr"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="White"
+                        BorderThickness="2"
+                        CornerRadius="5">
+                                <ContentPresenter
+                            x:Name="contentPresenter"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#FF00C093" />
+                                    <Setter Property="Opacity" Value="0.5" />
+                                    <Setter Property="Foreground" Value="#055F7F" />
+                                </Trigger>
+                                <Trigger Property="IsFocused" Value="True">
+                                    <Setter Property="Background" Value="#FF00C093" />
+                                    <Setter Property="Opacity" Value="1" />
+                                    <Setter Property="Foreground" Value="#055F7F" />
+                                </Trigger>
+
+
+
+
+                                <Trigger Property="IsEnabled" Value="false">
+
+                                    <Setter TargetName="btnBrdr" Property="Background" Value="#FFF0F0F0" />
+                                    <Setter TargetName="btnBrdr" Property="BorderBrush" Value="#686868" />
+                                    <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="Gray" />
+
+                                </Trigger>
+
+                            </ControlTemplate.Triggers>
+
+                        </ControlTemplate>
+
+                    </Setter.Value>
+
+                </Setter>
+
+            </Style>
+
+            <!--EndProducts -->
+
+            <!-- Unauthorized-->
+
+            <Style x:Key="ButtonStyle.Unauthorized" TargetType="{x:Type Button}">
+
+                <Setter Property="Foreground" Value="Black" />
+                <Setter Property="FontFamily" Value="Helvetica" />
+                <Setter Property="FontWeight" Value="Light" />
+                <Setter Property="Background" Value="Transparent" />
+
+                <Setter Property="Template">
+
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border
+                        x:Name="btnBrdr"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="White"
+                        BorderThickness="2"
+                        CornerRadius="5">
+                                <ContentPresenter
+                            x:Name="contentPresenter"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#FFED4D4D" />
+                                    <Setter Property="Opacity" Value="0.5" />
+                                    <Setter Property="Foreground" Value="#FF6A6A6A" />
+                                </Trigger>
+                                <Trigger Property="IsFocused" Value="True">
+                                    <Setter Property="Background" Value="#FFED4D4D" />
+                                    <Setter Property="Opacity" Value="1" />
+                                    <Setter Property="Foreground" Value="#FF6A6A6A" />
+                                </Trigger>
+
+                                <Trigger Property="IsEnabled" Value="false">
+
+                                    <Setter TargetName="btnBrdr" Property="Background" Value="#FFF0F0F0" />
+                                    <Setter TargetName="btnBrdr" Property="BorderBrush" Value="#686868" />
+                                    <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="Gray" />
+
+                                </Trigger>
+
+                            </ControlTemplate.Triggers>
+
+                        </ControlTemplate>
+
+                    </Setter.Value>
+
+                </Setter>
+
+            </Style>
+
+            <!--EndUnauthorized -->
+
+            <!--Users-->
+
+            <Style x:Key="ButtonStyle.Users" TargetType="{x:Type Button}">
+
+                <Setter Property="Foreground" Value="Black" />
+                <Setter Property="FontFamily" Value="Helvetica" />
+                <Setter Property="FontWeight" Value="Light" />
+                <Setter Property="Background" Value="Transparent" />
+
+                <Setter Property="Template">
+
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border
+                        x:Name="btnBrdr"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="White"
+                        BorderThickness="2"
+                        CornerRadius="5">
+                                <ContentPresenter
+                            x:Name="contentPresenter"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="Teal" />
+                                    <Setter Property="Opacity" Value="0.5" />
+                                    <Setter Property="Foreground" Value="#FF6A6A6A" />
+                                </Trigger>
+                                <Trigger Property="IsFocused" Value="True">
+                                    <Setter Property="Background" Value="Teal" />
+                                    <Setter Property="Opacity" Value="1" />
+                                    <Setter Property="Foreground" Value="#FF6A6A6A" />
+                                </Trigger>
+
+                                <Trigger Property="IsEnabled" Value="false">
+
+                                    <Setter TargetName="btnBrdr" Property="Background" Value="#FFF0F0F0" />
+                                    <Setter TargetName="btnBrdr" Property="BorderBrush" Value="#686868" />
+                                    <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="Gray" />
+
+                                </Trigger>
+
+                            </ControlTemplate.Triggers>
+
+                        </ControlTemplate>
+
+                    </Setter.Value>
+
+                </Setter>
+
+            </Style>
+
+            <!--EndUsers -->
+
+            <!--Acounts-->
+
+            <Style x:Key="ButtonStyle.Acounts" TargetType="{x:Type Button}">
+
+                <Setter Property="Foreground" Value="Black" />
+                <Setter Property="FontFamily" Value="Helvetica" />
+                <Setter Property="FontWeight" Value="Light" />
+                <Setter Property="Background" Value="Transparent" />
+
+                <Setter Property="Template">
+
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border
+                        x:Name="btnBrdr"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="White"
+                        BorderThickness="2"
+                        CornerRadius="5">
+                                <ContentPresenter
+                            x:Name="contentPresenter"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#FF3176FF" />
+                                    <Setter Property="Opacity" Value="0.5" />
+                                    <Setter Property="Foreground" Value="#2f3139" />
+                                </Trigger>
+                                <Trigger Property="IsFocused" Value="True">
+                                    <Setter Property="Background" Value="#FFFF9931" />
+                                    <Setter Property="Opacity" Value="1" />
+                                    <Setter Property="Foreground" Value="#FFFF9931" />
+                                </Trigger>
+
+                                <Trigger Property="IsEnabled" Value="false">
+
+                                    <Setter TargetName="btnBrdr" Property="Background" Value="#FFF0F0F0" />
+                                    <Setter TargetName="btnBrdr" Property="BorderBrush" Value="#686868" />
+                                    <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="Gray" />
+
+                                </Trigger>
+
+                            </ControlTemplate.Triggers>
+
+                        </ControlTemplate>
+
+                    </Setter.Value>
+
+                </Setter>
+
+            </Style>
+
+            <!--EndAcounts -->
+
+
+            <!-- Exit-->
+
+            <Style x:Key="ButtonStyle.Exit" TargetType="{x:Type Button}">
+
+                <Setter Property="Foreground" Value="Black" />
+                <Setter Property="FontFamily" Value="Helvetica" />
+                <Setter Property="FontWeight" Value="Light" />
+                <Setter Property="Background" Value="Transparent" />
+
+                <Setter Property="Template">
+
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border
+                        x:Name="btnBrdr"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="White"
+                        BorderThickness="2"
+                        CornerRadius="5">
+                                <ContentPresenter
+                            x:Name="contentPresenter"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="red" />
+                                    <Setter Property="Opacity" Value="0.5" />
+                                    <Setter Property="Foreground" Value="#FF6A6A6A" />
+                                </Trigger>
+                                <Trigger Property="IsFocused" Value="True">
+                                    <Setter Property="Background" Value="red" />
+                                    <Setter Property="Opacity" Value="1" />
+                                    <Setter Property="Foreground" Value="#FF6A6A6A" />
+                                </Trigger>
+
+                                <Trigger Property="IsEnabled" Value="false">
+
+                                    <Setter TargetName="btnBrdr" Property="Background" Value="#FFF0F0F0" />
+                                    <Setter TargetName="btnBrdr" Property="BorderBrush" Value="#686868" />
+                                    <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="Gray" />
+
+                                </Trigger>
+
+                            </ControlTemplate.Triggers>
+
+                        </ControlTemplate>
+
+                    </Setter.Value>
+
+                </Setter>
+
+            </Style>
+
+            <!--Exit -->
+            <!--#region new add but-->
+            <Style x:Key="ButtonStyle.addbut" TargetType="{x:Type Button}">
+
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="FontFamily" Value="Helvetica" />
+                <Setter Property="FontWeight" Value="Black" />
+                <Setter Property="Background" Value="Transparent" />
+
+
+                <Setter Property="Template">
+
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border
+                        x:Name="btnBrdr"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="White"
+                       
+                        BorderThickness="2"
+                        CornerRadius="5">
+
+                                <ContentPresenter
+                            x:Name="contentPresenter"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center" />
+
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="White" />
+                                    <Setter Property="Opacity" Value="0.4" />
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="Foreground" Value="DeepSkyBlue" />
+                                </Trigger>
+
+                                <Trigger Property="IsEnabled" Value="false">
+
+                                    <Setter TargetName="btnBrdr" Property="Background" Value="#FFF0F0F0" />
+                                    <Setter TargetName="btnBrdr" Property="BorderBrush" Value="#686868" />
+                                    <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="Gray" />
+
+                                </Trigger>
+
+                            </ControlTemplate.Triggers>
+
+                        </ControlTemplate>
+
+                    </Setter.Value>
+
+                </Setter>
+
+            </Style>
+            <!--#endregion add but-->
+
+            <!--#region AddReport  -->
+
+
+            <Style  x:Key="ButtonStyle.AddReport"  TargetType="Button">
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="FontFamily" Value="Helvetica" />
+                <Setter Property="FontWeight" Value="Light" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Visibility" Value="Hidden"/>
+                <Setter Property="Template">
+
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border
+                        x:Name="btnBrdr"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="White"
+                        BorderThickness="2"
+                        CornerRadius="5">
+
+                                <ContentPresenter
+                            x:Name="contentPresenter"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center" />
+
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="White" />
+                                    <Setter Property="Opacity" Value="0.4" />
+                                    <Setter Property="Foreground" Value="DeepSkyBlue" />
+                                </Trigger>
+
+                                <Trigger Property="IsEnabled" Value="false">
+
+                                    <Setter TargetName="btnBrdr" Property="Background" Value="#FFF0F0F0" />
+                                    <Setter TargetName="btnBrdr" Property="BorderBrush" Value="#686868" />
+                                    <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="Gray" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Information }" Value="">
+                        <Setter Property="Visibility" Value="Visible"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+
+
+            <!--#endregion-->
+
+
+
+
+
+
+
+
+
+
+
+
+        </ResourceDictionary>
+
+    </Application.Resources>
+</Application>
